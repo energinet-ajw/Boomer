@@ -12,8 +12,6 @@ public class ExceptionMiddleware : IMiddleware
         }
         catch (Exception exception)
         {
-          
-
             var response = context.Response;
             if (!response.HasStarted)
             {

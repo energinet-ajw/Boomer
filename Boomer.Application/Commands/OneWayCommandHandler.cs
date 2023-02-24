@@ -12,8 +12,8 @@ namespace Boomer.Application.Commands
         {
             _mediator = mediator;
         }
-        
-        protected override async Task Handle(OneWayCommand command, CancellationToken cancellationToken)
+ 
+        protected override async Task Handle(OneWayCommand request, CancellationToken cancellationToken)
         {
             await _mediator.Publish(new MyEvent(), cancellationToken);
         }

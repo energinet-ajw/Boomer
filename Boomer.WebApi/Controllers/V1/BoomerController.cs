@@ -22,37 +22,26 @@ namespace Boomer.WebApi.Controllers.V1
         ///     Get hello v1.
         /// </summary>
         [HttpGet]
-        public async Task<string> GetHello()
+        public async Task<string> GetHello(CancellationToken token)
         {
-            return await _mediator.Send(new GetHelloQuery());
+            return await _mediator.Send(new GetHelloQuery(), token);
         }
         
         /// <summary>
-        ///     Sends a OneWay command.
+        ///     Carete a boomer.
         /// </summary>
-        [HttpPost("functions/send")]
-        public async Task SendOneWay()
+        [HttpPost()]
+        public async Task CreateBoomer(CancellationToken token)
         {
-            await _mediator.Send(new OneWayCommand());
+            await _mediator.Send(new CreateBoomerCommand(11), token);
         }
         
         /// <summary>
-        ///     Sends a OneWay command from parameter.
-        /// </summary>
-        [HttpPost("functions/sendOneWay")]
-        public async Task SendOneWay(OneWayCommand command)
-        {
-            await _mediator.Send(command);
-        }
-        
-        /// <summary>
-        /// Returns boomer. 
+        ///     Get boomer. 
         /// </summary>
         [HttpGet("{id}")]
-        //[Authorize]
         public async Task<ActionResult> GetBoomer(string id)
         {
-            //return Forbid();
             return await Task.FromResult(Ok("Okay, Boomer"));
         }
     }

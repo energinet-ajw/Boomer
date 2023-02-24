@@ -1,6 +1,14 @@
+using System.ComponentModel;
 using System.Reflection;
+using Boomer.Application.Commands;
+using Boomer.Application.Commands.Base;
+using Boomer.Application.Queries;
+using Boomer.Application.Validators;
+using Boomer.Domain.Validators;
 using Boomer.WebApi.Extensions;
+using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace Boomer.WebApi
@@ -26,22 +34,42 @@ namespace Boomer.WebApi
             // Versioning configuration
             builder.Services.AddApiVersioning("'v'VVV");
 
-            
+            // Validation
+            builder.Services.AddValidatorsFromAssembly(typeof(CreateBoomerCommandValidator).Assembly);
+
+            var config = builder.Configuration;
+
+            /*
+            builder.Services.AddAuthentication().AddGoogle(options =>
+            {
+                var section = config.GetSection("Authentication:Google");
+                options.ClientId = section["ClientId"]!;
+                options.ClientSecret = section["ClientSecret"]!;
+            });
+            */
+
             // MediatR is a low-ambition library trying to solve a simple problem — decoupling the in-process sending of messages from handling messages.
             // By Jimmi Bogard, https://github.com/jbogard/MediatR
-            builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+            builder.Services.AddMediatR(typeof(Program));
             
+            // Register
             builder.Services.AddTransient<ExceptionMiddleware>();
-
+            builder.Services.AddScoped<AsyncRequestHandler<OneWayCommand>, OneWayCommandHandler>();
+            builder.Services.AddScoped<IRequestHandler<GetHelloQuery, string>, GetHelloQueryHandler>();
+            builder.Services.AddScoped<IRequestHandler<CreateBoomerCommand, Unit>, CreateBoomerCommandHandler>();
+            
+            // Register pipebehavior
+            builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+           
             var app = builder.Build();
             
             app.UseMiddleware<ExceptionMiddleware>();
-
-            var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+           
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
@@ -55,6 +83,7 @@ namespace Boomer.WebApi
 
             // Adds middleware for redirecting HTTP requests to HTTPS  
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
             await app.RunAsync();
