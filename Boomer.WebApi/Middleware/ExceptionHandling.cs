@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Boomer.WebApi.Extensions;
+namespace Boomer.WebApi.Middleware;
 
 public class ExceptionMiddleware : IMiddleware
 {

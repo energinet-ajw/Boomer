@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 
-namespace Boomer.Application.Validators
+namespace Boomer.Application.Validators.Base
 {
     public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
@@ -11,7 +11,7 @@ namespace Boomer.Application.Validators
         {
             _validators = validators;
         }
-  
+
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             if (_validators.Any())
@@ -20,7 +20,7 @@ namespace Boomer.Application.Validators
                 var validationResults = await Task.WhenAll(_validators.Select(v => v.ValidateAsync(context, cancellationToken)));
                 var failures = validationResults.SelectMany(r => r.Errors).Where(f => f != null).ToList();
                 if (failures.Count != 0)
-                    throw new FluentValidation.ValidationException(failures);
+                    throw new ValidationException(failures);
             }
             return await next();
         }
