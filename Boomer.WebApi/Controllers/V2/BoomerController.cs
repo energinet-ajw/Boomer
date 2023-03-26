@@ -41,7 +41,6 @@ namespace Boomer.WebApi.Controllers.V2
         ///     Sends a OneWay command from parameter v2.
         /// </summary>
         /// <param name="command">The command.</param>
-        /// <returns>OK</returns>
         [HttpPost("functions/sendOneWay")]
         public async Task SendOneWay(OneWayCommand command)
         {

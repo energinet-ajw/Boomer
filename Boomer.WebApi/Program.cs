@@ -3,8 +3,8 @@ using System.Reflection;
 using Boomer.Application.Commands;
 using Boomer.Application.Commands.Base;
 using Boomer.Application.Queries;
+using Boomer.Application.Validators;
 using Boomer.Application.Validators.Base;
-using Boomer.Domain.Validators;
 using Boomer.WebApi.Middleware;
 using FluentValidation;
 using MediatR;
@@ -36,17 +36,6 @@ namespace Boomer.WebApi
 
             // Validation
             builder.Services.AddValidatorsFromAssembly(typeof(CreateBoomerCommandValidator).Assembly);
-
-            var config = builder.Configuration;
-
-            /*
-            builder.Services.AddAuthentication().AddGoogle(options =>
-            {
-                var section = config.GetSection("Authentication:Google");
-                options.ClientId = section["ClientId"]!;
-                options.ClientSecret = section["ClientSecret"]!;
-            });
-            */
 
             // MediatR is a low-ambition library trying to solve a simple problem — decoupling the in-process sending of messages from handling messages.
             // By Jimmi Bogard, https://github.com/jbogard/MediatR

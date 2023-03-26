@@ -28,7 +28,7 @@ namespace Boomer.WebApi.Controllers.V1
         }
         
         /// <summary>
-        ///     Carete a boomer.
+        ///     Create boomer.
         /// </summary>
         [HttpPost()]
         public async Task CreateBoomer(CancellationToken token)
