@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Boomer.Application.Commands.Base
+namespace Boomer.Application.Base
 {
     public interface ICommand<out TResponse> : IRequest<TResponse>
     {

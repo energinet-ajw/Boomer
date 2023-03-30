@@ -1,5 +1,5 @@
-using Boomer.Application.Commands;
-using Boomer.Application.Queries;
+using Boomer.Application.Boomer;
+using Boomer.Application.Mouse;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

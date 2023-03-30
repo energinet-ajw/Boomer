@@ -1,7 +1,6 @@
-using Boomer.Application.Commands;
-using Boomer.Application.Queries;
+using Boomer.Application.Boomer;
+using Boomer.Application.Mouse;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Boomer.WebApi.Controllers.V1
@@ -28,12 +27,12 @@ namespace Boomer.WebApi.Controllers.V1
         }
         
         /// <summary>
-        ///     Create boomer.
+        ///     Create mouse.
         /// </summary>
-        [HttpPost()]
-        public async Task CreateBoomer(CancellationToken token)
+        [HttpPost]
+        public async Task<Guid> CreateMouse(CancellationToken token)
         {
-            await _mediator.Send(new CreateBoomerCommand(11), token);
+            return await _mediator.Send(new CreateMouseCommand(), token);
         }
         
         /// <summary>

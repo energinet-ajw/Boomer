@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Boomer.Application.Queries.Base
+namespace Boomer.Application.Base
 {
     public interface IQuery<out TResponse> : IRequest<TResponse>
     {

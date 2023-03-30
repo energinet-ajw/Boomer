@@ -1,4 +1,4 @@
-﻿namespace Boomer.Application.Commands
+﻿namespace Boomer.Application.Base
 {
     /// <summary>
     /// 

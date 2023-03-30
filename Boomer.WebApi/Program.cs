@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using System.Reflection;
+using Boomer.Application.Boomer;
+using Boomer.Application.Mouse;
 using Boomer.Application.Commands;
 using Boomer.Application.Commands.Base;
 using Boomer.Application.Queries;
@@ -45,7 +47,7 @@ namespace Boomer.WebApi
             builder.Services.AddTransient<ExceptionMiddleware>();
             builder.Services.AddScoped<AsyncRequestHandler<OneWayCommand>, OneWayCommandHandler>();
             builder.Services.AddScoped<IRequestHandler<GetHelloQuery, string>, GetHelloQueryHandler>();
-            builder.Services.AddScoped<IRequestHandler<CreateBoomerCommand, Unit>, CreateBoomerCommandHandler>();
+            builder.Services.AddScoped<IRequestHandler<CreateMouseCommand, Unit>, CreateMouseCommandHandler>();
             
             // Register pipebehavior
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
