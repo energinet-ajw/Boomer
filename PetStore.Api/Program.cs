@@ -28,6 +28,7 @@ public class Program
         builder.Services.SwaggerResolveConflictingActions();
 
         // Versioning configuration
+        // ReSharper disable once StringLiteralTypo
         builder.Services.AddApiVersioning("'v'VVV");
 
         // Validation
@@ -35,8 +36,8 @@ public class Program
 
         // MediatR is a low-ambition library trying to solve a simple problem — decoupling the in-process sending of messages from handling messages.
         // By Jimmi Bogard, https://github.com/jbogard/MediatR
-        builder.Services.AddMediatR(typeof(Program));
-
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        
         // Register
         builder.Services.AddTransient<ExceptionMiddleware>();
         builder.Services.AddScoped<IRequestHandler<OneWayCommand>, OneWayCommandHandler>();

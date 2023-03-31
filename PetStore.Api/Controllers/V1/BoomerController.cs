@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Application.Mouse;
 
-namespace Boomer.WebApi.Controllers.V1;
+namespace PetStore.Api.Controllers.V1;
 
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]

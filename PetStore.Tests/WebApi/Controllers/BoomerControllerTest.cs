@@ -1,7 +1,6 @@
 using System.Net;
-using Boomer.WebApi;
 using Microsoft.AspNetCore.Mvc.Testing;
-using PetStore.Api;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Xunit;
 
 namespace Boomer.Tests.WebApi.Controllers;
