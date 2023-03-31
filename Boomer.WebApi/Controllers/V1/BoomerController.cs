@@ -1,7 +1,6 @@
-using Boomer.Application.Boomer;
-using Boomer.Application.Mouse;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PetStore.Application.Mouse;
 
 namespace Boomer.WebApi.Controllers.V1
 {

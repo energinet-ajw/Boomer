@@ -1,17 +1,10 @@
-using System.ComponentModel;
-using System.Reflection;
-using Boomer.Application.Boomer;
-using Boomer.Application.Mouse;
-using Boomer.Application.Commands;
-using Boomer.Application.Commands.Base;
-using Boomer.Application.Queries;
 using Boomer.Application.Validators;
 using Boomer.Application.Validators.Base;
 using Boomer.WebApi.Middleware;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using PetStore.Application.Mouse;
 
 namespace Boomer.WebApi
 {
@@ -45,9 +38,9 @@ namespace Boomer.WebApi
             
             // Register
             builder.Services.AddTransient<ExceptionMiddleware>();
-            builder.Services.AddScoped<AsyncRequestHandler<OneWayCommand>, OneWayCommandHandler>();
+            builder.Services.AddScoped<IRequestHandler<OneWayCommand>, OneWayCommandHandler>();
             builder.Services.AddScoped<IRequestHandler<GetHelloQuery, string>, GetHelloQueryHandler>();
-            builder.Services.AddScoped<IRequestHandler<CreateMouseCommand, Unit>, CreateMouseCommandHandler>();
+            builder.Services.AddScoped<IRequestHandler<CreateMouseCommand, Guid>, CreateMouseCommandHandler>();
             
             // Register pipebehavior
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
