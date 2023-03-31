@@ -2,13 +2,13 @@
 
 namespace PetStore.Application.Mouse;
 
-public class GetHelloQuery : IQuery<string>
+public class GetMouseQuery : IQuery<string>
 {
 }
 
-public class GetHelloQueryHandler : IQueryHandler<GetHelloQuery, string>
+public class GetHelloQueryHandler : IQueryHandler<GetMouseQuery, string>
 {
-    public async Task<string> Handle(GetHelloQuery request, CancellationToken cancellationToken)
+    public async Task<string> Handle(GetMouseQuery request, CancellationToken cancellationToken)
     {
         return await Task.FromResult("Hello...");
     }

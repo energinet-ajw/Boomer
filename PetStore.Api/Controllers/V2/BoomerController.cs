@@ -23,7 +23,7 @@ public class BoomerController : ControllerBase
     [HttpGet]
     public async Task<string> GetHello()
     {
-        return await _mediator.Send(new GetHelloQuery());
+        return await _mediator.Send(new GetMouseQuery());
     }
 
     /// <summary>

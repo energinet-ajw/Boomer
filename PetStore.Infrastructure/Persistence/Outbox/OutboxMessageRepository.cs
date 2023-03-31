@@ -1,4 +1,3 @@
-using Boomer.Infrastructure.Persistence.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace PetStore.Infrastructure.Persistence.Outbox;

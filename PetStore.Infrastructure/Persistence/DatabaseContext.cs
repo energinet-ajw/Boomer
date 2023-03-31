@@ -1,8 +1,7 @@
-using Boomer.Infrastructure.Persistence.Outbox;
 using Microsoft.EntityFrameworkCore;
 using PetStore.Infrastructure.Persistence.Outbox;
 
-namespace PetStore.Infrastructure;
+namespace PetStore.Infrastructure.Persistence;
 
 public class DatabaseContext : DbContext, IDatabaseContext
 {
@@ -16,11 +15,12 @@ public class DatabaseContext : DbContext, IDatabaseContext
     {
     }
 
-    public DbSet<OutboxMessage> OutboxMessages { get; } = null!;
+    public DbSet<OutboxMessage> OutboxMessages { get; private set; } = null!;
+    public DbSet<Domain.MouseAggregate.Mouse> Mice { get; private set; } = null!;
 
-    public Task<int> SaveChangesAsync()
+    public new Task<int> SaveChangesAsync(CancellationToken token = default)
     {
-        return base.SaveChangesAsync();
+        return base.SaveChangesAsync(token);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

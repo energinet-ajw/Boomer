@@ -41,7 +41,7 @@ public class Program
         // Register
         builder.Services.AddTransient<ExceptionMiddleware>();
         builder.Services.AddScoped<IRequestHandler<OneWayCommand>, OneWayCommandHandler>();
-        builder.Services.AddScoped<IRequestHandler<GetHelloQuery, string>, GetHelloQueryHandler>();
+        builder.Services.AddScoped<IRequestHandler<GetMouseQuery, string>, GetHelloQueryHandler>();
         builder.Services.AddScoped<IRequestHandler<CreateMouseCommand, Guid>, CreateMouseCommandHandler>();
 
         builder.Services.AddMediatorPipelineBehaviours();

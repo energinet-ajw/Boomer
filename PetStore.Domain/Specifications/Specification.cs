@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Boomer.Domain.Specifications;
+namespace PetStore.Domain.Specifications;
 
 public abstract class Specification<T>
 {

@@ -7,11 +7,11 @@ namespace PetStore.Api.Controllers.V1;
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("1.0")]
-public class BoomerController : ControllerBase
+public class MouseController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public BoomerController(IMediator mediator)
+    public MouseController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -20,9 +20,9 @@ public class BoomerController : ControllerBase
     ///     Get hello v1.
     /// </summary>
     [HttpGet]
-    public async Task<string> GetHello(CancellationToken token)
+    public async Task<string> GetMouse(CancellationToken token)
     {
-        return await _mediator.Send(new GetHelloQuery(), token);
+        return await _mediator.Send(new GetMouseQuery(), token);
     }
 
     /// <summary>

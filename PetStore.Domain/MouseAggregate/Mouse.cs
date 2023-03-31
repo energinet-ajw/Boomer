@@ -1,4 +1,6 @@
-﻿namespace Boomer.Domain;
+﻿using Boomer.Domain;
+
+namespace PetStore.Domain.MouseAggregate;
 
 public class Mouse : AggregateRoot
 {
