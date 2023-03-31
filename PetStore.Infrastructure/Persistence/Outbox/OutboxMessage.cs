@@ -10,23 +10,8 @@ public class OutboxMessage
         CreationDate = creationDate;
     }
 
-    public Guid Id { get; }
-
-    public string MessageType { get; }
-
-    public byte[] Data { get; }
-
-    public DateTime CreationDate { get; }
-
-    public DateTime? ProcessedDate { get; private set; }
-
-    public void SetProcessed(DateTime when)
-    {
-        ProcessedDate = when;
-    }
-
     /// <summary>
-    /// Required by Entity Framework
+    ///     Required by Entity Framework
     /// </summary>
     // ReSharper disable once UnusedMember.Local
     private OutboxMessage(
@@ -41,5 +26,20 @@ public class OutboxMessage
         MessageType = messageType;
         CreationDate = creationDate;
         ProcessedDate = processedDate;
+    }
+
+    public Guid Id { get; }
+
+    public string MessageType { get; }
+
+    public byte[] Data { get; }
+
+    public DateTime CreationDate { get; }
+
+    public DateTime? ProcessedDate { get; private set; }
+
+    public void SetProcessed(DateTime when)
+    {
+        ProcessedDate = when;
     }
 }

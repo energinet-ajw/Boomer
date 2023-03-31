@@ -1,24 +1,25 @@
 using Microsoft.OpenApi.Models;
 
+namespace PetStore.Api.Extensions;
+
 public static class SwaggerExtensions
 {
     /// <summary>
     ///     Find all comment xml files and add them to the Swagger engine.
     /// </summary>
-    public static void SwaggerIncludeXmlComments(this IServiceCollection serviceCollection, string path, string searchPattern)
+    public static void SwaggerIncludeXmlComments(this IServiceCollection serviceCollection, string path,
+        string searchPattern)
     {
         var xmlFiles = Directory.GetFiles(path, searchPattern);
         serviceCollection.AddSwaggerGen(options =>
         {
             foreach (var xmlFile in xmlFiles)
-            {
                 // If creation of XML documentation is enabled, provide the path to them to include tags documentation in Swagger.
                 // https://medium.com/@alibenchaabene/include-xml-comments-in-swagger-under-asp-net-core-2-2-webapi-7514e44cc9b1
                 options.IncludeXmlComments(xmlFile);
-            }
         });
     }
-    
+
     public static void SwaggerResolveConflictingActions(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddSwaggerGen(options =>

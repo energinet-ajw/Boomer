@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace PetStore.Application.Base
+namespace PetStore.Application.Base;
+
+public interface IQuery<out TResponse> : IRequest<TResponse>
 {
-    public interface IQuery<out TResponse> : IRequest<TResponse>
-    {
-    }
 }

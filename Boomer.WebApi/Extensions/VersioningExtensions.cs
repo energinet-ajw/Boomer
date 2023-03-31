@@ -2,6 +2,8 @@ using Boomer.WebApi.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
+namespace PetStore.Api.Extensions;
+
 public static class VersioningExtensions
 {
     public static void AddApiVersioning(this IServiceCollection serviceCollection, string groupNameFormat)
@@ -15,14 +17,14 @@ public static class VersioningExtensions
                 new HeaderApiVersionReader("x-api-version"),
                 new MediaTypeApiVersionReader("x-api-version"));
         });
-        
+
         // Add ApiExplorer to discover versions
         serviceCollection.AddVersionedApiExplorer(setup =>
         {
             setup.GroupNameFormat = groupNameFormat;
             setup.SubstituteApiVersionInUrl = true;
         });
-        
+
         serviceCollection.ConfigureOptions<ConfigureSwaggerOptions>();
     }
 }

@@ -1,5 +1,3 @@
-using Boomer.Infrastructure.Persistence.Outbox;
-
 namespace PetStore.Infrastructure.Persistence.Outbox;
 
 public interface IOutboxMessageRepository

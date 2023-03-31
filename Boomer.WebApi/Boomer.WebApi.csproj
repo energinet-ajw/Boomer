@@ -4,8 +4,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <TargetFramework>net7.0</TargetFramework>
-    <AssemblyName>Boomer.WebApi</AssemblyName>
+    <AssemblyName>PetStore.Api</AssemblyName>
     <LangVersion>10</LangVersion>
+    <RootNamespace>PetStore.Api</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

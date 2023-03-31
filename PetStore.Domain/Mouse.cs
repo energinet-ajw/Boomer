@@ -1,32 +1,32 @@
-﻿namespace Boomer.Domain
+﻿namespace Boomer.Domain;
+
+public class Mouse : AggregateRoot
 {
-    public class Mouse : AggregateRoot
+    public Mouse()
     {
-        public Mouse() {
-            Id = Guid.NewGuid();
-        }
-
-        public Guid Id { get; }
+        Id = Guid.NewGuid();
     }
 
-    public abstract class AggregateRoot : Entity
+    public Guid Id { get; }
+}
+
+public abstract class AggregateRoot : Entity
+{
+}
+
+public abstract class Entity
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    public void ClearDomainEvents()
     {
+        _domainEvents.Clear();
     }
 
-    public abstract class Entity
+    protected void AddDomainEvent(IDomainEvent domainEvent)
     {
-        private readonly List<IDomainEvent> _domainEvents = new();
-
-        public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
-
-        public void ClearDomainEvents()
-        {
-            _domainEvents.Clear();
-        }
-
-        protected void AddDomainEvent(IDomainEvent domainEvent)
-        {
-            _domainEvents.Add(domainEvent);
-        }
+        _domainEvents.Add(domainEvent);
     }
 }
