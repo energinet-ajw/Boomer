@@ -3,11 +3,11 @@ using PetStore.Application.Base;
 
 namespace PetStore.Application.Mouse;
 
-public class OneWayCommand : ICommand
+public class PublishEventCommand : ICommand
 {
 }
 
-public class OneWayCommandHandler : ICommandHandler<OneWayCommand>
+public class OneWayCommandHandler : ICommandHandler<PublishEventCommand>
 {
     private readonly IMediator _mediator;
 
@@ -16,8 +16,8 @@ public class OneWayCommandHandler : ICommandHandler<OneWayCommand>
         _mediator = mediator;
     }
 
-    public async Task Handle(OneWayCommand request, CancellationToken cancellationToken)
+    public async Task Handle(PublishEventCommand request, CancellationToken cancellationToken)
     {
-        await _mediator.Publish(new MyEvent(), cancellationToken);
+        await _mediator.Publish(new MyEvent(), cancellationToken).ConfigureAwait(false);
     }
 }

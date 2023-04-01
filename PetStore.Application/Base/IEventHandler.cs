@@ -1,5 +1,5 @@
-﻿using Boomer.Domain;
-using MediatR;
+﻿using MediatR;
+using PetStore.Domain.Base;
 
 namespace PetStore.Application.Base;
 
