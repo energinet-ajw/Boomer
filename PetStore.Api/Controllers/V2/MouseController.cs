@@ -7,21 +7,21 @@ namespace PetStore.Api.Controllers.V2;
 [ApiController]
 [Route("api/v{version:apiVersion}/[controller]")]
 [ApiVersion("2.0")]
-public class BoomerController : ControllerBase
+public class MouseController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public BoomerController(IMediator mediator)
+    public MouseController(IMediator mediator)
     {
         _mediator = mediator;
     }
 
     /// <summary>
-    ///     Get hello v2.
+    ///     Get mouse v2.
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    public async Task<string> GetHello()
+    public async Task<string> GetMouse()
     {
         return await _mediator.Send(new GetMouseQuery());
     }
@@ -33,7 +33,7 @@ public class BoomerController : ControllerBase
     [HttpPost("functions/send")]
     public async Task SendOneWay()
     {
-        await _mediator.Send(new OneWayCommand());
+        await _mediator.Send(new PublishEventCommand());
     }
 
     /// <summary>
@@ -41,7 +41,7 @@ public class BoomerController : ControllerBase
     /// </summary>
     /// <param name="command">The command.</param>
     [HttpPost("functions/sendOneWay")]
-    public async Task SendOneWay(OneWayCommand command)
+    public async Task SendOneWay(PublishEventCommand command)
     {
         await _mediator.Send(command);
     }
