@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using PetStore.Api.Extensions;
 using PetStore.Application.Base;
 using PetStore.Application.Mouse;
+using PetStore.Application.Mouse.Listeners;
 using PetStore.Domain.MouseAggregate;
 using PetStore.Infrastructure.EventDispatching;
 using PetStore.Infrastructure.Persistence;
@@ -51,6 +52,7 @@ public class Program
         builder.Services.AddTransient<IDomainEventContainer, DomainEventContainer>();
         builder.Services.AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
         builder.Services.AddTransient<IMouseRepository, MouseRepository>();
+        builder.Services.AddTransient<INotificationHandler<MouseCreatedDomainEvent>, MouseCreatedEventListener>();
 
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();

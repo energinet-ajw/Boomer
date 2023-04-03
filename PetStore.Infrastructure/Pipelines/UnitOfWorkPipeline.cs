@@ -16,7 +16,7 @@ public class UnitOfWorkPipeline<TRequest, TResponse> : IPipelineBehavior<TReques
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken token)
     {
-        await Console.Out.WriteLineAsync("Calling next..");
+        await Console.Out.WriteLineAsync("Calling next on UnitOfWorkPipeline...");
         var result = await next().ConfigureAwait(false);
         await _unitOfWork.CommitAsync(token).ConfigureAwait(false);
         await Console.Out.WriteLineAsync("Committed!");

@@ -15,7 +15,7 @@ public class DomainEventsDispatcherPipeline<TRequest, TResponse> : IPipelineBeha
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken token)
     {
-        await Console.Out.WriteLineAsync("Calling next2...");
+        await Console.Out.WriteLineAsync("Calling next on DomainEventsDispatcher...").ConfigureAwait(false);
         var result = await next().ConfigureAwait(false);
         await _domainEventDispatcher.DispatchAsync(token).ConfigureAwait(false);
         await Console.Out.WriteLineAsync("Dispatched domain events!");
