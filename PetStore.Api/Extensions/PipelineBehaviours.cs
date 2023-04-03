@@ -1,12 +1,15 @@
-using Boomer.Application.Validators.Base;
 using MediatR;
+using PetStore.Application.Validators.Base;
+using PetStore.Infrastructure.Pipelines;
 
 namespace PetStore.Api.Extensions;
 
 public static class PipelineBehaviours
 {
-    public static void AddMediatorPipelineBehaviours(this IServiceCollection serviceCollection)
+    public static void AddPipelineBehaviours(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        serviceCollection.AddScoped(typeof(IPipelineBehavior<,>), typeof(UnitOfWorkPipeline<,>));
+        serviceCollection.AddScoped(typeof(IPipelineBehavior<,>), typeof(DomainEventsDispatcherPipeline<,>));
+        serviceCollection.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipeline<,>));
     }
 }

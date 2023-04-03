@@ -17,12 +17,12 @@ public class MouseController : ControllerBase
     }
 
     /// <summary>
-    ///     Get hello v1.
+    ///     Get mice.
     /// </summary>
     [HttpGet]
-    public async Task<string> GetMouse(CancellationToken token)
+    public async Task<IList<MouseDto>> GetMice(CancellationToken token)
     {
-        return await _mediator.Send(new GetMouseQuery(), token);
+        return await _mediator.Send(new GetMiceQuery(), token);
     }
 
     /// <summary>
@@ -35,11 +35,11 @@ public class MouseController : ControllerBase
     }
 
     /// <summary>
-    ///     Get boomer.
+    ///     Get Mouse.
     /// </summary>
-    [HttpGet("{id}")]
-    public async Task<ActionResult> GetBoomer(string id)
+    [HttpGet("{id:guid}")]
+    public async Task<MouseDto> GetMouse(Guid id, CancellationToken token)
     {
-        return await Task.FromResult(Ok("Okay, Boomer"));
+        return await _mediator.Send(new GetMouseQuery(id), token);
     }
 }

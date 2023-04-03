@@ -17,16 +17,6 @@ public class MouseController : ControllerBase
     }
 
     /// <summary>
-    ///     Get mouse v2.
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet]
-    public async Task<string> GetMouse()
-    {
-        return await _mediator.Send(new GetMouseQuery());
-    }
-
-    /// <summary>
     ///     Sends a OneWay command v2.
     /// </summary>
     /// <returns>OK</returns>

@@ -2,10 +2,10 @@ namespace PetStore.Infrastructure.Persistence.Outbox;
 
 public class OutboxMessage
 {
-    public OutboxMessage(byte[] eventData, string eventMessageType, DateTime creationDate)
+    public OutboxMessage(byte[] data, string eventMessageType, DateTime creationDate)
     {
         Id = Guid.NewGuid();
-        Data = eventData;
+        Data = data;
         MessageType = eventMessageType;
         CreationDate = creationDate;
     }

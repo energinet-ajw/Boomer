@@ -7,6 +7,6 @@ public class MyEventHandler : IEventHandler<MyEvent>
 {
     public async Task Handle(MyEvent event1, CancellationToken cancellationToken)
     {
-        await Unit.Task;
+        await Unit.Task.ConfigureAwait(false);
     }
 }

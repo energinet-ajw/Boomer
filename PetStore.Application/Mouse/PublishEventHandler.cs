@@ -7,11 +7,11 @@ public class PublishEventCommand : ICommand
 {
 }
 
-public class OneWayCommandHandler : ICommandHandler<PublishEventCommand>
+public class PublishEventHandler : ICommandHandler<PublishEventCommand>
 {
     private readonly IMediator _mediator;
 
-    public OneWayCommandHandler(IMediator mediator)
+    public PublishEventHandler(IMediator mediator)
     {
         _mediator = mediator;
     }
