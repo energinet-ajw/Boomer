@@ -1,7 +1,7 @@
 ﻿using PetStore.Application.Base;
 using PetStore.Domain.MouseAggregate;
 
-namespace PetStore.Application.Mouse;
+namespace PetStore.Application.Mouse.Queries;
 
 public class GetMiceQuery : IQuery<IList<MouseDto>>
 {

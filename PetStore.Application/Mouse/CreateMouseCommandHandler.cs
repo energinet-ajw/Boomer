@@ -5,6 +5,11 @@ namespace PetStore.Application.Mouse;
 
 public class CreateMouseCommand : ICommand<Guid>
 {
+    public CreateMouseCommand(string name)
+    {
+        Name = name;
+    }
+    public string Name { get; }
 }
 
 public class CreateMouseCommandHandler : ICommandHandler<CreateMouseCommand, Guid>
@@ -18,7 +23,7 @@ public class CreateMouseCommandHandler : ICommandHandler<CreateMouseCommand, Gui
 
     public async Task<Guid> Handle(CreateMouseCommand command, CancellationToken cancellationToken)
     {
-        var mouse = new Domain.MouseAggregate.Mouse();
+        var mouse = new Domain.MouseAggregate.Mouse(command.Name);
         await _mouseRepository.AddAsync(mouse).ConfigureAwait(false);
         return mouse.Id;
     }

@@ -7,6 +7,7 @@
         <AssemblyName>PetStore.Api</AssemblyName>
         <LangVersion>10</LangVersion>
         <RootNamespace>PetStore.Api</RootNamespace>
+        <UserSecretsId>PetStore</UserSecretsId>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

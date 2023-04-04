@@ -1,14 +1,13 @@
 using Boomer.Application.Validators;
 using Boomer.WebApi.Middleware;
 using FluentValidation;
-using MediatR;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Newtonsoft.Json;
 using PetStore.Api.Extensions;
+using PetStore.Api.Options;
 using PetStore.Application.Base;
-using PetStore.Application.Mouse;
-using PetStore.Application.Mouse.Listeners;
 using PetStore.Domain.MouseAggregate;
+using PetStore.Domain.Specifications;
 using PetStore.Infrastructure.EventDispatching;
 using PetStore.Infrastructure.Persistence;
 using PetStore.Infrastructure.Persistence.Mouse;
@@ -42,23 +41,27 @@ public class Program
 
         // MediatR is a low-ambition library trying to solve a simple problem — decoupling the in-process sending of messages from handling messages.
         // By Jimmi Bogard, https://github.com/jbogard/MediatR
-        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(Root).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(PetStore.Application.Root).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(PetStore.Domain.Root).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(PetStore.Infrastructure.Root).Assembly);
+        });
+        
+        builder.Services.AddPipelineBehaviours();
+        
+        builder.Services.Configure<MySecrets>(builder.Configuration.GetSection("MySecrets"));
+        
         // Register
         builder.Services.AddTransient<ExceptionMiddleware>();
-        builder.Services.AddTransient<IRequestHandler<PublishEventCommand>, PublishEventHandler>();
-        builder.Services.AddTransient<IRequestHandler<GetMouseQuery, MouseDto>, GetMouseQueryHandler>();
-        builder.Services.AddTransient<IRequestHandler<CreateMouseCommand, Guid>, CreateMouseCommandHandler>();
         builder.Services.AddTransient<IDomainEventContainer, DomainEventContainer>();
         builder.Services.AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
         builder.Services.AddTransient<IMouseRepository, MouseRepository>();
-        builder.Services.AddTransient<INotificationHandler<MouseCreatedDomainEvent>, MouseCreatedEventListener>();
-
+        
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();
         
-        builder.Services.AddPipelineBehaviours();
-
         var app = builder.Build();
 
         app.UseMiddleware<ExceptionMiddleware>();

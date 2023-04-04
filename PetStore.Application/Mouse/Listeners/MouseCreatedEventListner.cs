@@ -7,6 +7,6 @@ public class MouseCreatedEventListener : INotificationHandler<MouseCreatedDomain
 {
     public async Task Handle(MouseCreatedDomainEvent notification, CancellationToken cancellationToken)
     {
-        await Console.Out.WriteLineAsync($"New mouse created. Id: {notification.Id }.").ConfigureAwait(false);
+        await Console.Out.WriteLineAsync($"MouseCreatedEventListener: New mouse created (Id: {notification.Id }).").ConfigureAwait(false);
     }
 }

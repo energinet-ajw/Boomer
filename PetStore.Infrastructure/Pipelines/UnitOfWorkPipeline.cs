@@ -4,7 +4,7 @@ using PetStore.Application.Base;
 namespace PetStore.Infrastructure.Pipelines;
 
 public class UnitOfWorkPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : ICommand<TResponse>
+    where TRequest : IRequest<TResponse>
 {
     private readonly IUnitOfWork _unitOfWork;
 

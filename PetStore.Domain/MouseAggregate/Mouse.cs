@@ -4,11 +4,21 @@ namespace PetStore.Domain.MouseAggregate;
 
 public class Mouse : AggregateRoot
 {
-    public Mouse()
+    public string Name { get; }
+
+    public Mouse(string name)
     {
         Id = Guid.NewGuid();
+        Name = name;
         AddDomainEvent(new MouseCreatedDomainEvent(Id));
     }
 
+    // ReSharper disable once UnusedMember.Local
+    // Used by Entity Framework.
+    private Mouse()
+    {
+        Id = Guid.NewGuid();
+        Name = string.Empty;
+    }
     public Guid Id { get; }
 }
