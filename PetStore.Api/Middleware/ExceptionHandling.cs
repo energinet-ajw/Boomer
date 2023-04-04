@@ -1,3 +1,4 @@
+using System.Net;
 using Newtonsoft.Json;
 
 namespace Boomer.WebApi.Middleware;
@@ -16,6 +17,7 @@ public class ExceptionMiddleware : IMiddleware
             if (!response.HasStarted)
             {
                 response.ContentType = "application/json";
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
                 await response.WriteAsync(JsonConvert.SerializeObject(exception));
             }
         }

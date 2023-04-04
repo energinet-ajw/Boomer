@@ -1,6 +1,7 @@
 using Boomer.Application.Validators;
 using Boomer.WebApi.Middleware;
 using FluentValidation;
+using MediatR.Pipeline;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Newtonsoft.Json;
 using PetStore.Api.Extensions;
@@ -9,6 +10,7 @@ using PetStore.Application.Base;
 using PetStore.Domain.MouseAggregate;
 using PetStore.Domain.Specifications;
 using PetStore.Infrastructure.EventDispatching;
+using PetStore.Infrastructure.ExceptionHandling;
 using PetStore.Infrastructure.Persistence;
 using PetStore.Infrastructure.Persistence.Mouse;
 
@@ -58,9 +60,13 @@ public class Program
         builder.Services.AddTransient<IDomainEventContainer, DomainEventContainer>();
         builder.Services.AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
         builder.Services.AddTransient<IMouseRepository, MouseRepository>();
+
+        builder.Services.AddTransient(typeof(IRequestExceptionHandler<,,>), typeof(ExceptionLoggingHandler<,,>));
         
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();
+        
+        
         
         var app = builder.Build();
 
