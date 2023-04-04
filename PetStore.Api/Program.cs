@@ -1,12 +1,12 @@
-using Boomer.Application.Validators;
-using Boomer.WebApi.Middleware;
 using FluentValidation;
 using MediatR.Pipeline;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Newtonsoft.Json;
 using PetStore.Api.Extensions;
+using PetStore.Api.Middleware;
 using PetStore.Api.Options;
 using PetStore.Application.Base;
+using PetStore.Application.Validators;
 using PetStore.Domain.MouseAggregate;
 using PetStore.Domain.Specifications;
 using PetStore.Infrastructure.EventDispatching;
@@ -39,7 +39,7 @@ public class Program
         builder.Services.AddApiVersioning("'v'VVV");
 
         // Validation
-        builder.Services.AddValidatorsFromAssembly(typeof(CreateBoomerCommandValidator).Assembly);
+        builder.Services.AddValidatorsFromAssembly(typeof(CreateMouseCommandValidator).Assembly);
 
         // MediatR is a low-ambition library trying to solve a simple problem — decoupling the in-process sending of messages from handling messages.
         // By Jimmi Bogard, https://github.com/jbogard/MediatR

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Boomer.WebApi.Swagger;
+namespace PetStore.Api.Swagger;
 
 public class ConfigureSwaggerOptions
     : IConfigureNamedOptions<SwaggerGenOptions>

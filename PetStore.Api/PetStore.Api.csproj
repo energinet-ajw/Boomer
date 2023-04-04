@@ -31,10 +31,4 @@
         <ProjectReference Include="..\PetStore.Application\PetStore.Application.csproj" />
         <ProjectReference Include="..\PetStore.Infrastructure\PetStore.Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-        <_ContentIncludedByDefault Remove="Boomer.Domain\obj\Boomer.Domain.csproj.nuget.dgspec.json" />
-        <_ContentIncludedByDefault Remove="Boomer.Domain\obj\project.assets.json" />
-    </ItemGroup>
-
 </Project>

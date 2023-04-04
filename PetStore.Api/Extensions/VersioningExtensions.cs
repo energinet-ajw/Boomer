@@ -1,6 +1,6 @@
-using Boomer.WebApi.Swagger;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using PetStore.Api.Swagger;
 
 namespace PetStore.Api.Extensions;
 

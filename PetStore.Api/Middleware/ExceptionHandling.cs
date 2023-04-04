@@ -1,7 +1,7 @@
 using System.Net;
 using Newtonsoft.Json;
 
-namespace Boomer.WebApi.Middleware;
+namespace PetStore.Api.Middleware;
 
 public class ExceptionMiddleware : IMiddleware
 {
