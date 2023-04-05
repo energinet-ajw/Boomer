@@ -1,6 +1,6 @@
 ﻿using PetStore.Application.Base;
 using PetStore.Domain.MouseAggregate;
-using PetStore.Domain.Specifications;
+using PetStore.Domain.MouseAggregate.Specifications;
 
 namespace PetStore.Application.Mouse.Queries;
 

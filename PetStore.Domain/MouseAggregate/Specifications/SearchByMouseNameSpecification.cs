@@ -1,8 +1,7 @@
 ﻿using System.Linq.Expressions;
 using PetStore.Domain.Base;
-using PetStore.Domain.MouseAggregate;
 
-namespace PetStore.Domain.Specifications;
+namespace PetStore.Domain.MouseAggregate.Specifications;
 
 public class SearchByMouseNameSpecification : Specification<Mouse>
 {
