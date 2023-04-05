@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Application.Mouse;
+using PetStore.Application.Mouse.Queries;
 
 namespace PetStore.Api.Controllers.V2;
 
@@ -17,22 +18,11 @@ public class MouseController : ControllerBase
     }
 
     /// <summary>
-    ///     Sends a OneWay command v2.
+    ///     Get Mouse v2.
     /// </summary>
-    /// <returns>OK</returns>
-    [HttpPost("functions/send")]
-    public async Task SendOneWay()
+    [HttpGet("{id:guid}")]
+    public async Task<MouseDto> GetMouse(Guid id, CancellationToken token)
     {
-        await _mediator.Send(new PublishEventCommand());
-    }
-
-    /// <summary>
-    ///     Sends a OneWay command from parameter v2.
-    /// </summary>
-    /// <param name="command">The command.</param>
-    [HttpPost("functions/sendOneWay")]
-    public async Task SendOneWay(PublishEventCommand command)
-    {
-        await _mediator.Send(command);
+        return await _mediator.Send(new GetMouseQuery(id), token);
     }
 }

@@ -4,11 +4,11 @@ using Xunit;
 
 namespace PetStore.Tests.WebApi.Controllers;
 
-public class MiceControllerTest : IClassFixture<WebApplicationFactory<PetStore.Api.Program>>
+public class MiceControllerTest : IClassFixture<WebApplicationFactory<Api.Program>>
 {
-    private readonly WebApplicationFactory<PetStore.Api.Program> _factory;
+    private readonly WebApplicationFactory<Api.Program> _factory;
 
-    public MiceControllerTest(WebApplicationFactory<PetStore.Api.Program> factory)
+    public MiceControllerTest(WebApplicationFactory<Api.Program> factory)
     {
         _factory = factory;
     }

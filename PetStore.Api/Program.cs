@@ -1,6 +1,7 @@
 using FluentValidation;
 using MediatR.Pipeline;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PetStore.Api.Extensions;
 using PetStore.Api.Middleware;
@@ -28,6 +29,10 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
 
+        builder.Services.AddDbContext<DatabaseContext>(
+            options => options.UseSqlite("PetStoreDb")
+            );
+        
         // Swagger configuration
         builder.Services.SwaggerIncludeXmlComments(AppContext.BaseDirectory, "*.xml");
         builder.Services.SwaggerAddSecurity();
@@ -64,9 +69,7 @@ public class Program
         
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();
-        
-        
-        
+       
         var app = builder.Build();
 
         app.UseMiddleware<ExceptionMiddleware>();

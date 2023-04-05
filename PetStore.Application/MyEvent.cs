@@ -1,9 +1,9 @@
 ﻿using PetStore.Domain.Base;
 
-namespace PetStore.Application.Base;
+namespace PetStore.Application;
 
 /// <summary>
 /// </summary>
-public class MyEvent : IEvent
+public class MyEvent : IDomainEvent
 {
 }

@@ -19,8 +19,4 @@
         <None Remove="PetStore.Application.csproj.DotSettings" />
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Mouse\Events" />
-    </ItemGroup>
-
 </Project>

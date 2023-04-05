@@ -14,5 +14,7 @@ public class MouseEntityConfiguration : IEntityTypeConfiguration<Domain.MouseAgg
             .ValueGeneratedNever();
         
         builder.Property(b => b.Name);
+        
+        builder.Ignore(x => x.DomainEvents);
     }
 }

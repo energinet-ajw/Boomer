@@ -23,11 +23,6 @@ public class DatabaseContext : DbContext, IDatabaseContext
     {
         return base.SaveChangesAsync(token);
     }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseInMemoryDatabase("PetStoreDb");
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
