@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace PetStore.Infrastructure.EventDispatching;
+namespace PetStore.Infrastructure.EventDispatching.Domain;
 
 public class DomainEventDispatcher : IDomainEventDispatcher
 {

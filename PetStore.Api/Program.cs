@@ -10,6 +10,7 @@ using PetStore.Application.Base;
 using PetStore.Application.Validators;
 using PetStore.Domain.MouseAggregate;
 using PetStore.Infrastructure.EventDispatching;
+using PetStore.Infrastructure.EventDispatching.Domain;
 using PetStore.Infrastructure.ExceptionHandling;
 using PetStore.Infrastructure.Persistence;
 using PetStore.Infrastructure.Persistence.Mouse;

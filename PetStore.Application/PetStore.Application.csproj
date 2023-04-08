@@ -12,11 +12,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="12.0.1" />
+        <None Remove="PetStore.Application.csproj.DotSettings" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="PetStore.Application.csproj.DotSettings" />
+      <PackageReference Include="MediatR" Version="12.0.1" />
+      <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 using MediatR;
 using PetStore.Infrastructure.EventDispatching;
+using PetStore.Infrastructure.EventDispatching.Domain;
 
 namespace PetStore.Infrastructure.Pipelines;
 
