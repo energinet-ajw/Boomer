@@ -2,11 +2,11 @@ namespace PetStore.Infrastructure.Persistence.Outbox;
 
 public class OutboxMessage
 {
-    public OutboxMessage(byte[] data, string eventMessageType, DateTime creationDate)
+    public OutboxMessage(byte[] data, string messageType, DateTime creationDate)
     {
         Id = Guid.NewGuid();
         Data = data;
-        MessageType = eventMessageType;
+        MessageType = messageType;
         CreationDate = creationDate;
     }
 
@@ -36,7 +36,7 @@ public class OutboxMessage
 
     public DateTime CreationDate { get; }
 
-    public DateTime? ProcessedDate { get; private set; }
+    public DateTime? ProcessedDate { get; set; }
 
     public void SetProcessed(DateTime when)
     {

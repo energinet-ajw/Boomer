@@ -4,10 +4,10 @@ namespace PetStore.Domain.MouseAggregate;
 
 public class MouseCreatedDomainEvent : IDomainEvent
 {
-    public readonly Guid Id;
+    public readonly Guid MouseId;
 
-    public MouseCreatedDomainEvent(Guid id)
+    public MouseCreatedDomainEvent(Guid mouseId)
     {
-        Id = id;
+        MouseId = mouseId;
     }
 }
