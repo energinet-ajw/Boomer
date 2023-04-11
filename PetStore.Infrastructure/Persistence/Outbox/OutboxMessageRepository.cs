@@ -1,17 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Internal;
 
 namespace PetStore.Infrastructure.Persistence.Outbox;
 
 public class OutboxMessageRepository : IOutboxMessageRepository
 {
     private readonly IDatabaseContext _context;
-    private readonly ISystemClock _systemClock;
 
-    public OutboxMessageRepository(IDatabaseContext context, ISystemClock systemClock)
+    public OutboxMessageRepository(IDatabaseContext context)
     {
         _context = context;
-        _systemClock = systemClock;
     }
 
     public async Task AddAsync(OutboxMessage message)

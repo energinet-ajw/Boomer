@@ -1,19 +1,23 @@
 using FluentValidation;
-using MediatR.Pipeline;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Internal;
 using Newtonsoft.Json;
 using PetStore.Api.Extensions;
 using PetStore.Api.Middleware;
 using PetStore.Api.Options;
 using PetStore.Application.Base;
-using PetStore.Application.Validators;
 using PetStore.Domain.MouseAggregate;
 using PetStore.Infrastructure.EventDispatching;
 using PetStore.Infrastructure.EventDispatching.Domain;
-using PetStore.Infrastructure.ExceptionHandling;
+using PetStore.Infrastructure.EventDispatching.Integration;
+using PetStore.Infrastructure.Outbox;
 using PetStore.Infrastructure.Persistence;
 using PetStore.Infrastructure.Persistence.Mouse;
+using PetStore.Infrastructure.Persistence.Outbox;
+using ISystemClock = Microsoft.Extensions.Internal.ISystemClock;
 
 namespace PetStore.Api;
 
@@ -30,10 +34,16 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
 
-        builder.Services.AddDbContext<DatabaseContext>(
-            options => options.UseSqlite("PetStoreDb")
+        /*builder.Services.AddDbContext<DatabaseContext>(
+            options => options.UseSqlite(builder.Configuration.GetConnectionString("PetStore"))
             );
-        
+        */
+        var inMemorySqlite = new SqliteConnection(builder.Configuration.GetConnectionString("PetStore"));
+        inMemorySqlite.Open();
+        builder.Services.AddDbContext<DatabaseContext>(options => {
+            options.UseSqlite(inMemorySqlite);
+        });
+      
         // Swagger configuration
         builder.Services.SwaggerIncludeXmlComments(AppContext.BaseDirectory, "*.xml");
         builder.Services.SwaggerAddSecurity();
@@ -44,19 +54,9 @@ public class Program
         builder.Services.AddApiVersioning("'v'VVV");
 
         // Validation
-        builder.Services.AddValidatorsFromAssembly(typeof(CreateMouseCommandValidator).Assembly);
-
-        // MediatR is a low-ambition library trying to solve a simple problem — decoupling the in-process sending of messages from handling messages.
-        // By Jimmi Bogard, https://github.com/jbogard/MediatR
-        builder.Services.AddMediatR(cfg =>
-        {
-            cfg.RegisterServicesFromAssembly(typeof(Root).Assembly);
-            cfg.RegisterServicesFromAssembly(typeof(PetStore.Application.Root).Assembly);
-            cfg.RegisterServicesFromAssembly(typeof(PetStore.Domain.Root).Assembly);
-            cfg.RegisterServicesFromAssembly(typeof(PetStore.Infrastructure.Root).Assembly);
-        });
+        builder.Services.AddValidatorsFromAssembly(typeof(PetStore.Application.Root).Assembly);
         
-        builder.Services.AddPipelineBehaviours();
+        builder.Services.AddMediator();
         
         builder.Services.Configure<MySecrets>(builder.Configuration.GetSection("MySecrets"));
         
@@ -65,12 +65,15 @@ public class Program
         builder.Services.AddTransient<IDomainEventContainer, DomainEventContainer>();
         builder.Services.AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();
         builder.Services.AddTransient<IMouseRepository, MouseRepository>();
-
-        builder.Services.AddTransient(typeof(IRequestExceptionHandler<,,>), typeof(ExceptionLoggingHandler<,,>));
+        builder.Services.AddTransient<IIntegrationEventPublisher, IntegrationEventPublisher>();
+        builder.Services.AddTransient<IOutboxMessageRepository, OutboxMessageRepository>();
+        builder.Services.AddTransient<IOutboxMessageFactory, OutboxMessageFactory>();
         
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();
-       
+
+        builder.Services.AddSingleton<ISystemClock>(new Microsoft.Extensions.Internal.SystemClock());
+        
         var app = builder.Build();
 
         app.UseMiddleware<ExceptionMiddleware>();

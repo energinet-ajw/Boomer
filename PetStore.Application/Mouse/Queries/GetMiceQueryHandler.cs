@@ -18,6 +18,6 @@ public class GetMiceQueryHandler : IQueryHandler<GetMiceQuery, IList<MouseDto>>
     public async Task<IList<MouseDto>> Handle(GetMiceQuery query, CancellationToken token)
     {
         var mice = await _mouseRepository.GetAllAsync(token).ConfigureAwait(false);
-        return mice.Select(x => new MouseDto { Id = x.Id }).ToList();
+        return mice.Select(x => new MouseDto { Id = x.Id, Name = x.Name }).ToList();
     }
 }
