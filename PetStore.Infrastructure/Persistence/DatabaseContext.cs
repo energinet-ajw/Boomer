@@ -9,6 +9,7 @@ public sealed class DatabaseContext : DbContext, IDatabaseContext
     public DatabaseContext(DbContextOptions<DatabaseContext> options)
         : base(options)
     {
+        // TODO - Removed when using real database
         Database.EnsureCreated();
     }
 

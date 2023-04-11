@@ -2,5 +2,5 @@
 
 public class MySecrets
 {
-    public string? AspnetcoreEnvironment { get; set; }
+    public string AspnetcoreEnvironment { get; set; }
 }
