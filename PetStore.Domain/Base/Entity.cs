@@ -13,6 +13,7 @@ public abstract class Entity
 
     protected void AddDomainEvent(IDomainEvent domainEvent)
     {
+        Console.Out.WriteLine(domainEvent.GetType().Name + " added to domain events.");
         _domainEvents.Add(domainEvent);
     }
 }

@@ -4,6 +4,6 @@ namespace PetStore.Infrastructure.EventDispatching;
 
 public interface IDomainEventContainer
 {
-    IReadOnlyCollection<IDomainEvent> GetAllDomainEvents();
-    void ClearAllDomainEvents();
+    Task<IReadOnlyCollection<IDomainEvent>> GetAllDomainEventsAsync();
+    Task ClearAllDomainEvents();
 }

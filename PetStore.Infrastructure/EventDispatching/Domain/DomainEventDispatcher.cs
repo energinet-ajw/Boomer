@@ -14,12 +14,21 @@ public class DomainEventDispatcher : IDomainEventDispatcher
     }
     public async Task DispatchAsync(CancellationToken token)
     {
-        var domainEvents = _domainEventContainer.GetAllDomainEvents();
-        foreach (var domainEvent in domainEvents)
+        var domainEvents = await _domainEventContainer.GetAllDomainEventsAsync();
+        
+        var tasks = new List<Task>();
+        while (domainEvents.Any())
         {
-            await _mediator.Publish(domainEvent, token).ConfigureAwait(false);
-        }
+            await _domainEventContainer.ClearAllDomainEvents();
 
-        _domainEventContainer.ClearAllDomainEvents();
+            tasks.AddRange(domainEvents
+                .Select(async (domainEvent) => {
+                    await Console.Out.WriteLineAsync($"Dispatching domain event {domainEvent.GetType()}");
+                    await _mediator.Publish(domainEvent, token).ConfigureAwait(false);
+                }));
+
+            domainEvents = await _domainEventContainer.GetAllDomainEventsAsync();
+        }
+        await Task.WhenAll(tasks);
     }
 }

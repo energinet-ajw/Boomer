@@ -23,7 +23,8 @@ public class CreateMouseCommandHandler : ICommandHandler<CreateMouseCommand, Gui
 
     public async Task<Guid> Handle(CreateMouseCommand command, CancellationToken cancellationToken)
     {
-        var mouse = new Domain.MouseAggregate.Mouse(command.Name);
+        await Console.Out.WriteLineAsync($"Handling {command.GetType().Name}...").ConfigureAwait(false);
+        var mouse = new Domain.MouseAggregate.Mouse("Jerry");
         await _mouseRepository.AddAsync(mouse).ConfigureAwait(false);
         return mouse.Id;
     }

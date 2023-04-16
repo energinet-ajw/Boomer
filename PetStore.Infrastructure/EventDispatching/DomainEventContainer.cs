@@ -12,18 +12,21 @@ public class DomainEventContainer : IDomainEventContainer
         _databaseContext = databaseContext;
     }
 
-    public IReadOnlyCollection<IDomainEvent> GetAllDomainEvents()
+    public async Task<IReadOnlyCollection<IDomainEvent>> GetAllDomainEventsAsync()
     {
+       
         var domainEvents = _databaseContext.ChangeTracker
             .Entries<Entity>()
             .SelectMany(x => x.Entity.DomainEvents)
             .ToList();
 
+        await Console.Out.WriteLineAsync("Getting all domain events from cache...");
         return domainEvents;
     }
 
-    public void ClearAllDomainEvents()
+    public async Task ClearAllDomainEvents()
     {
+        await Console.Out.WriteLineAsync("Clearing all domain events from cache...");
         _databaseContext.ChangeTracker
             .Entries<Entity>()
             .ToList()

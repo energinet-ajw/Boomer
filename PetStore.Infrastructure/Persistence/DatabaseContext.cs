@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PetStore.Infrastructure.Persistence.Cat;
 using PetStore.Infrastructure.Persistence.Mouse;
 using PetStore.Infrastructure.Persistence.Outbox;
 
@@ -21,6 +22,8 @@ public sealed class DatabaseContext : DbContext, IDatabaseContext
     public DbSet<OutboxMessage> OutboxMessages { get; private set; } = null!;
     public DbSet<Domain.MouseAggregate.Mouse> Mice { get; private set; } = null!;
 
+    public DbSet<Domain.CatAggregate.Cat> Cats { get; private set; } = null!;
+    
     public new Task<int> SaveChangesAsync(CancellationToken token = default)
     {
         return base.SaveChangesAsync(token);
@@ -30,6 +33,7 @@ public sealed class DatabaseContext : DbContext, IDatabaseContext
     {
         modelBuilder.ApplyConfiguration(new OutboxMessageEntityConfiguration());
         modelBuilder.ApplyConfiguration(new MouseEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new CatEntityConfiguration());
         
         base.OnModelCreating(modelBuilder);
     }

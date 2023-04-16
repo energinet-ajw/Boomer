@@ -9,6 +9,8 @@ public interface IDatabaseContext
     DbSet<OutboxMessage> OutboxMessages { get; }
 
     DbSet<Domain.MouseAggregate.Mouse> Mice { get; }
+    
+    DbSet<Domain.CatAggregate.Cat> Cats { get; }
     ChangeTracker ChangeTracker { get; }
 
     Task<int> SaveChangesAsync(CancellationToken token = default);
