@@ -15,6 +15,12 @@ public class DomainEventDispatcher : IDomainEventDispatcher
     public async Task DispatchAsync(CancellationToken token)
     {
         var domainEvents = await _domainEventContainer.GetAllDomainEventsAsync();
+        /*
+        foreach (var domainEvent in domainEvents) {
+            await _mediator.Publish(domainEvent, token).ConfigureAwait(false);
+        }
+        await _domainEventContainer.ClearAllDomainEvents();
+        */
         
         var tasks = new List<Task>();
         while (domainEvents.Any())
