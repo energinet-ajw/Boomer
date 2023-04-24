@@ -2,10 +2,13 @@ namespace CarStore.Application.Handlers;
 
 public class Car
 {
-    private readonly string _name;
-
     public Car(string name)
     {
-        _name = name;
+        Id = Guid.NewGuid();
+        Name = name;
     }
+
+    public Guid Id { get; }
+    
+    public string Name { get; }
 }

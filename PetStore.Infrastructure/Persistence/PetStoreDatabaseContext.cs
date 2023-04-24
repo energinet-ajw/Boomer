@@ -5,9 +5,9 @@ using PetStore.Infrastructure.Persistence.Outbox;
 
 namespace PetStore.Infrastructure.Persistence;
 
-public sealed class DatabaseContext : DbContext, IDatabaseContext
+public sealed class PetStoreDatabaseContext : DbContext, IDatabaseContext
 {
-    public DatabaseContext(DbContextOptions<DatabaseContext> options)
+    public PetStoreDatabaseContext(DbContextOptions<PetStoreDatabaseContext> options)
         : base(options)
     {
         // TODO - Removed when using real database
@@ -15,7 +15,7 @@ public sealed class DatabaseContext : DbContext, IDatabaseContext
     }
 
     // Added to support Moq in tests
-    public DatabaseContext()
+    public PetStoreDatabaseContext()
     {
     }
 

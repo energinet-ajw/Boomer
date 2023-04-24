@@ -1,4 +1,6 @@
 using CarStore.Infrastructure.Persistence;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Wolverine;
 using ISystemClock = Microsoft.Extensions.Internal.ISystemClock;
 
@@ -11,6 +13,14 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        
+        var inMemorySqlite = new SqliteConnection(builder.Configuration.GetConnectionString("CarStore"));
+        inMemorySqlite.Open();
+        builder.Services.AddDbContext<CarStoreDbContext>(options => {
+            options.UseSqlite(inMemorySqlite);
+        });
+
+        
         builder.Services.AddSingleton<ISystemClock>(new Microsoft.Extensions.Internal.SystemClock());
         
         builder.Host.UseWolverine();

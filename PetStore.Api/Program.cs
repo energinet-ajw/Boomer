@@ -40,7 +40,7 @@ public class Program
         */
         var inMemorySqlite = new SqliteConnection(builder.Configuration.GetConnectionString("PetStore"));
         inMemorySqlite.Open();
-        builder.Services.AddDbContext<DatabaseContext>(options => {
+        builder.Services.AddDbContext<PetStoreDatabaseContext>(options => {
             options.UseSqlite(inMemorySqlite);
         });
       
@@ -71,7 +71,7 @@ public class Program
         builder.Services.AddTransient<IOutboxMessageFactory, OutboxMessageFactory>();
         
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-        builder.Services.AddScoped<IDatabaseContext, DatabaseContext>();
+        builder.Services.AddScoped<IDatabaseContext, PetStoreDatabaseContext>();
 
         builder.Services.AddSingleton<ISystemClock>(new Microsoft.Extensions.Internal.SystemClock());
         

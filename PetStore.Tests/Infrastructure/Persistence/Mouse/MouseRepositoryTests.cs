@@ -11,22 +11,22 @@ namespace PetStore.Tests.Infrastructure.Persistence.Mouse;
 public class MouseRepositoryTests : IDisposable
 {
     private readonly DbConnection _connection;
-    private readonly DbContextOptions<DatabaseContext> _contextOptions;
+    private readonly DbContextOptions<PetStoreDatabaseContext> _contextOptions;
     
     public MouseRepositoryTests()
     {
         _connection = new SqliteConnection("DataSource=:memory:");
         _connection.Open();
 
-        _contextOptions = new DbContextOptionsBuilder<DatabaseContext>()
+        _contextOptions = new DbContextOptionsBuilder<PetStoreDatabaseContext>()
             .UseSqlite(_connection)
             .Options;
 
-        using var context = new DatabaseContext(_contextOptions);
+        using var context = new PetStoreDatabaseContext(_contextOptions);
         context.Database.EnsureCreated();
     }
 
-    private DatabaseContext CreateContext() => new (_contextOptions);
+    private PetStoreDatabaseContext CreateContext() => new (_contextOptions);
     public void Dispose() => _connection.Dispose();
 
     [Fact] 
