@@ -1,9 +1,7 @@
 using FluentValidation;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Internal;
 using Newtonsoft.Json;
 using PetStore.Api.Extensions;
 using PetStore.Api.Middleware;

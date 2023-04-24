@@ -21,5 +21,6 @@ public class Mouse : AggregateRoot
         Name = string.Empty;
         ClearDomainEvents();
     }
+
     public Guid Id { get; }
 }
