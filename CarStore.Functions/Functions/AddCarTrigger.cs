@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CarStore.Application.Handlers;
-using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
 namespace CarStore.Functions.Functions;
@@ -15,10 +15,10 @@ public class AddCarTrigger
         _handler = handler;
     }
     
-    [FunctionName("AddCarTrigger")]
+    [Function("AddCarTrigger")]
     public async Task RunAsync([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
     {
-        log.LogInformation($"C# Timer trigger function executed at: {DateTime.UtcNow}");
-        await _handler.HandleAsync(new CreateCarCommand());
+        //log.LogInformation($"C# Timer trigger function executed at: {DateTime.UtcNow}");
+        var id = await _handler.HandleAsync(new CreateCarCommand());
     }
 }

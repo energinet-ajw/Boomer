@@ -10,11 +10,11 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
-      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.4" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="7.0.4" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.5" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-      <PackageReference Include="WolverineFx" Version="0.9.16" />
+      <PackageReference Include="WolverineFx" Version="0.9.17" />
     </ItemGroup>
 
     <ItemGroup>
