@@ -19,6 +19,6 @@ public class AddCarTrigger
     public async Task RunAsync([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
     {
         //log.LogInformation($"C# Timer trigger function executed at: {DateTime.UtcNow}");
-        var id = await _handler.HandleAsync(new CreateCarCommand());
+        var id = await _handler.HandleAsync(new CreateCarCommand("Ford"));
     }
 }

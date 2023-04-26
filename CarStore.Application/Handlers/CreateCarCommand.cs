@@ -4,5 +4,10 @@ namespace CarStore.Application.Handlers;
 
 public class CreateCarCommand : ICommand<Guid>
 {
-    public string Name { get; set; }
+    public CreateCarCommand(string name)
+    {
+        Name = name;
+    }
+    
+    public string Name { get; }
 }
