@@ -16,7 +16,7 @@ public class MouseCreatedDomainEventHandler : IDomainEventHandler<MouseCreatedDo
         _catRepository = catRepository;
     }
     
-    public async Task Handle(MouseCreatedDomainEvent domainEvent, CancellationToken cancellationToken)
+    public async Task Handle(MouseCreatedDomainEvent domainEvent, CancellationToken token)
     {
         await Console.Out.WriteLineAsync($"MouseCreatedEventHandler: New mouse created (Id: {domainEvent.MouseId }).").ConfigureAwait(false);
         var integrationEvent = new MouseCreatedIntegrationEvent
@@ -24,8 +24,7 @@ public class MouseCreatedDomainEventHandler : IDomainEventHandler<MouseCreatedDo
             Id = Guid.NewGuid(),
             Data = domainEvent.MouseId.ToByteArray()
         };
-        var cat = new Domain.CatAggregate.Cat("Tom");
-        await _catRepository.AddAsync(cat).ConfigureAwait(false);
+        
         await _integrationEventPublisher.PublishAsync(integrationEvent).ConfigureAwait(false);
     }
 }
