@@ -17,7 +17,7 @@ public class CarStoreDbContext : DbContext, ICarStoreDbContext
     {
     }
 
-    public DbSet<Application.Handlers.Car> Cars { get; private set; } = null!;
+    public DbSet<Application.Cars.Car> Cars { get; private set; } = null!;
     
     public new Task<int> SaveChangesAsync(CancellationToken token = default)
     {

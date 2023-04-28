@@ -2,8 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using PetStore.Application.Cat;
 using PetStore.Application.Cat.Queries;
-using PetStore.Application.Mouse;
-using PetStore.Application.Mouse.Queries;
 
 namespace PetStore.Api.Controllers.V1;
 

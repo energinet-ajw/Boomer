@@ -27,7 +27,6 @@ public class MiceController : ControllerBase
     [HttpGet]
     public async Task<IList<MouseDto>> GetMice(CancellationToken token)
     {
-        Console.Out.WriteLine("AJW " + _mySecrets.Value.AspnetcoreEnvironment);
         return await _mediator.Send(new GetMiceQuery(), token);
     }
 

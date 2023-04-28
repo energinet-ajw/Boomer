@@ -1,6 +1,6 @@
-using CarStore.Application.Base2;
+using CarStore.Application.Base;
 
-namespace CarStore.Application.Handlers;
+namespace CarStore.Application.Cars;
 
 public class CreateCarCommand : ICommand<Guid>
 {

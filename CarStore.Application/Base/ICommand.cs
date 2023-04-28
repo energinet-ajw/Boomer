@@ -1,4 +1,4 @@
-namespace CarStore.Application.Base2;
+namespace CarStore.Application.Base;
 
 public interface ICommand<TRequest>
 {
