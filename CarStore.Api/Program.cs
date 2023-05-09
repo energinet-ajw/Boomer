@@ -1,3 +1,5 @@
+using CarStore.APi.Routes;
+using CarStore.Application.Cars;
 using CarStore.Infrastructure.Persistence;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -25,11 +27,11 @@ public class Program
         
         builder.Host.UseWolverine();
         
-        builder.Services.AddTransient<CarRepository>();
+        builder.Services.AddTransient<ICarRepository, CarRepository>();
         
         var app = builder.Build();
         
-        app.MapPost("/cars", (CreateCar body, IMessageBus bus) => bus.InvokeAsync(body));
+        app.AddRoutes();
         
         
         // Adds middleware for redirecting HTTP requests to HTTPS  

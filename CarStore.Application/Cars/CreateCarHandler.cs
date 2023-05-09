@@ -1,4 +1,6 @@
-﻿namespace CarStore.Application.Cars;
+﻿using CarStore.Application.Base;
+
+namespace CarStore.Application.Cars;
 
 public class CreateCarHandler : ICommandHandler<CreateCarCommand, Guid>
 {

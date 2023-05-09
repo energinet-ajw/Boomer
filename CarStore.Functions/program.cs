@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using CarStore.Application.Base;
 using CarStore.Application.Cars;
 using CarStore.Infrastructure.Persistence;
 using Microsoft.Azure.Functions.Worker;
