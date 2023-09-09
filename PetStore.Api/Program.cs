@@ -74,6 +74,9 @@ public class Program
         builder.Services.AddScoped<IDatabaseContext, PetStoreDatabaseContext>();
 
         builder.Services.AddSingleton<ISystemClock>(new Microsoft.Extensions.Internal.SystemClock());
+
+        // Health checks
+        builder.Services.AddHealthChecks();
         
         var app = builder.Build();
 
