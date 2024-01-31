@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using CarStore.Application.Base;
 using CarStore.Application.Cars;
 using CarStore.Infrastructure.Persistence;
-using Microsoft.Azure.Functions.Worker;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -16,16 +15,12 @@ public static class Program
 {
     public static async Task Main()
     {
-       
-        
         var host = new HostBuilder()
             // Used to add settings required for the function app to run in an isolated worker process
-            .ConfigureFunctionsWorkerDefaults(builder =>
-            {
-                builder
-                    .AddApplicationInsights();
+            //.ConfigureFunctionsWorkerDefaults(builder =>
+            //{
                 //.AddApplicationInsightsLogger();
-            })
+            //})
             .ConfigureServices(s =>
             {
                 s.AddTransient<ICommandHandler<CreateCarCommand, Guid>, CreateCarHandler>();
@@ -45,11 +40,3 @@ public static class Program
         await host.RunAsync().ConfigureAwait(false);
     }
 }
-
-
-
-
-
-  
-
-
